@@ -4,8 +4,10 @@ import TodosLogic from './components/TodosLogic';
 function App() {
   return (
     <div className="todo-app">
-      <Header />
-      <TodosLogic />
+      <div className="todos">
+        <Header />
+        <TodosLogic />
+      </div>
     </div>
   );
 }
