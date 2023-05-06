@@ -1,7 +1,10 @@
 import { useState } from 'react';
-import styles from "../styles/TodoItem.module.css";
+import PropTypes from 'prop-types';
+import styles from '../styles/TodoItem.module.css';
 
-const TodoItem = ({ todo, handleChange, delTodo, setUpdate }) => {
+const TodoItem = ({
+  todo, handleChange, delTodo, setUpdate,
+}) => {
   const completedStyle = {
     fontStyle: 'italic',
     color: '#595959',
@@ -37,21 +40,29 @@ const TodoItem = ({ todo, handleChange, delTodo, setUpdate }) => {
           checked={todo.completed}
           onChange={() => handleChange(todo.id)}
         />
-        <button onClick={handleEditing}>Edit</button>
-        <button onClick={() => delTodo(todo.id)}>Delete</button>
+        <button type="button" onClick={handleEditing}>Edit</button>
+        <button type="button" onClick={() => delTodo(todo.id)}>Delete</button>
         <span style={todo.completed ? completedStyle : null}>
           {todo.title}
         </span>
       </div>
       <input
-      type="text"
-      onChange={(e) => setUpdate(e.target.value, todo.id)}
-      onKeyDown={handleUpdatedDone}
-      value={todo.title}
-      className={styles.textInput}
-      style={editMode}
-    />
+        type="text"
+        onChange={(e) => setUpdate(e.target.value, todo.id)}
+        onKeyDown={handleUpdatedDone}
+        value={todo.title}
+        className={styles.textInput}
+        style={editMode}
+      />
     </li>
   );
 };
+
+TodoItem.propTypes = {
+  todo: PropTypes.isRequired,
+  handleChange: PropTypes.isRequired,
+  delTodo: PropTypes.isRequired,
+  setUpdate: PropTypes.isRequired,
+};
+
 export default TodoItem;
